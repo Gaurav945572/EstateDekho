@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import userRouter from "./Routes/User.js";
 import signUpRouter from "./Routes/SignUp.js"
 import signInRouter from "./Routes/SignIn.js"
+import googleAuth from "./Routes/OAuth.js"
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use("/api/user",userRouter);
 app.use("/api/auth", signUpRouter)
 app.use('/api/auth',signInRouter);
+app.use('/api/auth/',googleAuth);
 
 
 app.use((err,req,res,next)=>{
