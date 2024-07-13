@@ -162,7 +162,7 @@ export default function Header() {
                         </li>
 
                         <li>
-                            {currentUser ? (<Link to='/profile'> <img className={`h-10 rounded-full w-10 ${isDropdownOpen ? "hidden" : "block"}`} src={currentUser.avatar}></img></Link>)
+                            {currentUser ? (<Link to='/profile'> <img  className={`h-10 rounded-full w-10 ${isDropdownOpen ? "hidden" : "block"} `} src={currentUser.avatar}></img></Link>)
                                 : (
                                     <Link
                                         to="/signin"

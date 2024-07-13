@@ -4,7 +4,8 @@ import dotenv from "dotenv";
 import userRouter from "./Routes/User.js";
 import signUpRouter from "./Routes/SignUp.js"
 import signInRouter from "./Routes/SignIn.js"
-import googleAuth from "./Routes/OAuth.js"
+import googleAuth from "./Routes/OAuth.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -14,8 +15,11 @@ mongoose.connect(process.env.key).then(()=>{
 }).catch((error)=>{
     console.log(error)
 });
+
+
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 
 app.use("/api/user",userRouter);
