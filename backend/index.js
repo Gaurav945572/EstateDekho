@@ -7,6 +7,7 @@ import signInRouter from "./Routes/SignIn.js"
 import googleAuth from "./Routes/OAuth.js";
 import cookieParser from "cookie-parser";
 import signOutRouter from "./Routes/SignOut.js";
+import listingRouter from './Routes/Listing.js'
 
 dotenv.config();
 
@@ -28,7 +29,7 @@ app.use("/api/auth", signUpRouter)
 app.use('/api/auth',signInRouter);
 app.use('/api/auth/',googleAuth);
 app.use('/api/auth/',signOutRouter);
-
+app.use('/api/listing',listingRouter);
 
 app.use((err,req,res,next)=>{
     const statusCode = err.statusCode ||500;
