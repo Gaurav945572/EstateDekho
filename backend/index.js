@@ -6,6 +6,7 @@ import signUpRouter from "./Routes/SignUp.js"
 import signInRouter from "./Routes/SignIn.js"
 import googleAuth from "./Routes/OAuth.js";
 import cookieParser from "cookie-parser";
+import signOutRouter from "./Routes/SignOut.js";
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use("/api/user",userRouter);
 app.use("/api/auth", signUpRouter)
 app.use('/api/auth',signInRouter);
 app.use('/api/auth/',googleAuth);
+app.use('/api/auth/',signOutRouter);
 
 
 app.use((err,req,res,next)=>{

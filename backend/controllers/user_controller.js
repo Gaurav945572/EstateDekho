@@ -49,8 +49,7 @@ export const deleteUser = async(req,res,next)=>{
         res.status(201).json({message:"User has been deleted successfully"});
         
     } catch (error) {
-        res.status(419).json({ message: "An error occurred while deleting the user" });
-        
+        res.status(419).json({ message: "An error occurred while deleting the user" });    
     }
 
 
