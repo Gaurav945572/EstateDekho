@@ -8,4 +8,5 @@ userRouter.get("/test",test);
 userRouter.post('/update/:id',middleWare,updateUser);
 userRouter.delete('/delete/:id',middleWare,deleteUser);
 
+
 export default userRouter;
