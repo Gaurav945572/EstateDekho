@@ -1,16 +1,33 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState ,useEffect} from "react";
+import { Link ,useNavigate} from "react-router-dom";
 import logo from "../Logo/logo.svg";
 import { useSelector } from "react-redux";
 
 export default function Header() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const[searchTerm,setSearchTerm]= useState('');
+    const navigate = useNavigate();
+    //console.log(searchTerm);
 
     // Function to toggle the dropdown state
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
     const { currentUser } = useSelector((state) => state.user);
+    const handleSubmit =(e)=>{
+        e.preventDefault();
+        const urlParams = new URLSearchParams(window.location.search);
+        urlParams.set('searchTerm', searchTerm);
+        const searchQuery = urlParams.toString();
+        navigate(`/search?${searchQuery}`);
+    }
+    useEffect(() => {
+        const urlParams = new URLSearchParams(location.search);
+        const searchTermFromUrl = urlParams.get('searchTerm');
+        if (searchTermFromUrl) {
+          setSearchTerm(searchTermFromUrl);
+        }
+      }, [location.search]);
 
     return (
         <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -68,12 +85,16 @@ export default function Header() {
                             </svg>
                             <span className="sr-only">Search icon</span>
                         </div>
-                        <form action="">
+                        <form onSubmit={handleSubmit} action="">
                             <input
                                 type="text"
                                 id="search-navbar"
                                 className="block  w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 outline-none rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Search..."
+                                value={searchTerm}
+                                onChange={(e)=>{
+                                    setSearchTerm(e.target.value);
+                                }}
                             />
                         </form>
                     </div>
@@ -131,12 +152,16 @@ export default function Header() {
                                     </svg>
                                     <span className="sr-only">Search icon</span>
                                 </div>
-                                <form action="">
+                                <form onSubmit={handleSubmit} action="">
                                     <input
                                         type="text"
                                         id="search-navbar"
                                         className="block  w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 outline-none rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="Search..."
+                                        value={searchTerm}
+                                        onChange={(e)=>{
+                                            setSearchTerm(e.target.value);
+                                        }}
                                     />
                                 </form>
                             </div>
@@ -144,7 +169,7 @@ export default function Header() {
 
                         <li>
                             <Link
-                                to="/home"
+                                to="/"
                                 className="m-2 block hover:underline py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
                                 aria-current="page"
                             >
