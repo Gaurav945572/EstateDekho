@@ -35,7 +35,7 @@ export default function Header() {
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a className="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src={logo} className="h-12" alt="Flowbite Logo" />
+          <img src={logo} className="h-12" alt="HomeSpace Logo" />
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
             <div className="leading-tight">
               <div>HomeSpace</div>

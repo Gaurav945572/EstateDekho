@@ -73,7 +73,7 @@ export default function Profile() {
         body: JSON.stringify(formData),
       });
       const  data = await res.json();
-      if(data.success === false){
+      if(data.success === "false"){
         dispatch(updateUserFailure(data.message));
         return;
       }
@@ -88,12 +88,13 @@ export default function Profile() {
   const handleDelete = async(e)=>{
     e.preventDefault();
     try {
-      dispatch(deleteUserStart);
+      dispatch(deleteUserStart());
       const res= await fetch(`/api/user/delete/${currentUser._id}`,{
         method:"DELETE",
       });
       const  data = await res.json();
-      if(data.success === false){
+      
+      if(data.success === "false"){
         dispatch(deleteUserFailure(data.message));
         return;
       }

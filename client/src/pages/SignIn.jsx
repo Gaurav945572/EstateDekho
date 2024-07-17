@@ -39,6 +39,7 @@ export default function SignIn() {
         return;
       }
       dispatch(signInSuccess(data));
+      //console.log("dhx");
       navigate('/'); // Use navigate to redirect
     } catch (error) {
       dispatch(signInFailure(error.message));
@@ -100,7 +101,7 @@ export default function SignIn() {
             <div>
               <button
                 disabled={loading}
-                type="submit"
+                
                 className="flex uppercase w-full justify-center rounded-md dark:bg-gray-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:opacity-95  hover:transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 {loading ? 'Loading....' : 'Sign In'}

@@ -1,5 +1,5 @@
 import Listing from "../model/listing_model.js"
-
+import { errorHandler } from "../Middleware/error.js";
 export const createListing = async(req,res,next)=>{
     try {
         const listing  = await Listing.create(req.body);
@@ -17,10 +17,10 @@ export const createListing = async(req,res,next)=>{
 export const deleteListing = async(req,res,next)=>{
     const listing = await Listing.findById(req.params.id);
     if(!listing){
-        return res.status(434).json({"req.param.id":req.params.id});
+        return next(errorHandler(404, 'Listing not found!'));
     }
     if(listing.userRef !== req.user.id){
-        return res.status(431).json({message:"You can delete your own list only"});
+        return next(errorHandler(401, 'You can only delete your own listings!'));
     }
     try {
         await Listing.findByIdAndDelete(req.params.id);
@@ -33,18 +33,16 @@ export const deleteListing = async(req,res,next)=>{
 export const updateListing = async(req,res,next)=>{
     const listing = await Listing.findById(req.params.id);
     if(!listing){
-        return res.status(454).json({message:"Listing not found"});
+        return next(errorHandler(404, 'Listing not found!'));
     }
     if(listing.userRef !== req.user.id){
-        return res.status(431).json({message:"You can update your own list only"});
+        return next(errorHandler(401, 'You can only update your own listings!'));
     }
     try {
         const updateList = await Listing.findByIdAndUpdate(req.params.id,req.body,{new:true});
         res.status(248).json(updateList);        
-    } catch (error) {
-        
-        next(error);
-        
+    } catch (error) {   
+        next(error);    
     }
 }
 
@@ -53,7 +51,7 @@ export const getListing = async (req, res, next) => {
     try {
       const listing = await Listing.findById(req.params.id);
       if (!listing) {
-        return res.status(465).json({message:"No list found"});
+        return next(errorHandler(404, 'Listing not found!'));
       }
       res.status(200).json(listing);
     } catch (error) {

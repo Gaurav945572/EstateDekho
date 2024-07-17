@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import User from "../model/user_model.js";
 import Listing from "../model/listing_model.js";
+import { errorHandler } from "../Middleware/error.js";
 
 
 export const test  = (req,res)=>{
@@ -12,12 +13,12 @@ export const test  = (req,res)=>{
 
 export const updateUser = async (req, res) => {
     if (req.user.id !== req.params.id) {
-        return res.status(407).json({ message: "You can update your own account only." });
+        return next(errorHandler(401, 'You can only update your own account!'))
     }
 
     try {
         if (req.body.password) {
-            req.body.password = bcrypt.hashSync(req.body.password, 12);
+            req.body.password = bcrypt.hashSync(req.body.password, 10);
         }
 
         const updatedUser = await User.findByIdAndUpdate(req.params.id, {
@@ -30,6 +31,7 @@ export const updateUser = async (req, res) => {
         }, { new: true });
 
         if (!updatedUser) {
+            
             return res.status(404).json({ message: "User not found" });
         }
 
@@ -44,11 +46,11 @@ export const updateUser = async (req, res) => {
 
 export const deleteUser = async(req,res,next)=>{
     if (req.user.id !== req.params.id) {
-        res.clearCookies('access_token');
-        return res.status(409).json({ message: "You can delete your own account only." });
+        return next(errorHandler(401, 'You can only delete your own account!'));
     }
     try {
         await User.findByIdAndDelete(req.params.id);
+        res.clearCookie('access_token');
         res.status(201).json({message:"User has been deleted successfully"});
         
     } catch (error) {
@@ -65,11 +67,9 @@ export const getUser = async (req, res, next) => {
       const user = await User.findById(req.params.id);
   
       if (!user){
-        return res.status(472).json({message:"User not found"});
+        return next(errorHandler(404, 'User not found!'));
       }
-  
       const { password: pass, ...rest } = user._doc;
-  
       res.status(200).json(rest);
     } catch (error) {
       next(error);
@@ -85,6 +85,6 @@ export const getUserListings = async (req, res, next) => {
         next(error);
       }
     } else {
-      return next(errorHandler(401, 'You can only view your own listings!'));
+      return  next(errorHandler(401, 'You can only view your own listings!'));
     }
 };
