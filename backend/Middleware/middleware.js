@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 export const middleWare = (req,res,next)=>{
-    const token = req.cookies.access_token;
+    const token = req.cookies.access-token;
     //console.log(token);
     if(!token){
         return res.status(401).json({message:"Unauthorised.."}); 
@@ -12,3 +12,4 @@ export const middleWare = (req,res,next)=>{
         return next();
     });
 };
+ 

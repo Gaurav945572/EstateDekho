@@ -20,14 +20,14 @@ export default function App() {
     <Routes>
       <Route  path="/" element={<Home/>}></Route>
       <Route  path='/about' element={<About/>}></Route>
-      <Route  path='/signin' element={<SignIn/>}></Route>
-      <Route  path='/signup' element={<SignUp/>}></Route>
+      <Route  path='/sign-in' element={<SignIn/>}></Route>
+      <Route  path='/sign-up' element={<SignUp/>}></Route>
       <Route path='/search' element={<Search />} />
       <Route  path='/listing/:listingId' element={<Listing/>}></Route>
       <Route element={<PrivateRoute/>}>
         <Route  path='/profile' element={<Profile/>}></Route>
-        <Route  path='/create' element={<CreateListing/>}></Route>
-        <Route  path='/update/:listingId' element={<UpdateListing/>}></Route>
+        <Route  path='/create-listing' element={<CreateListing/>}></Route>
+        <Route  path='/update-listing/:listingId' element={<UpdateListing/>}></Route>
       </Route>
     
     </Routes>

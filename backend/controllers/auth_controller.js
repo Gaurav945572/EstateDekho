@@ -38,7 +38,7 @@ export const signin = async(req,res,next)=>{
     }
 };
 
-export const oauth = async (req, res, next) => {
+export const google = async (req, res, next) => {
     try {
         // Ensure email is provided in the request body
         const { email, name, photo } = req.body;
@@ -73,7 +73,7 @@ export const oauth = async (req, res, next) => {
 };
 
 
-export const signout =(req,res,next)=>{
+export const signOut =(req,res,next)=>{
     try {
         res.clearCookie('access_token');
         return res.status(200).json({ "message": "Use logged out successfully" });   

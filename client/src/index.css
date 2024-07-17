@@ -4,5 +4,11 @@
 
 
 body{
-    background-color: rgb(199, 191, 241);
+    /* background: linear-gradient(to right, #6366F1, #A855F7, #EC4899); */
+    background: linear-gradient(
+  to right,
+  #6366F1 10%,
+  #0EA5E9 30%,
+  #10B981 90%
+);
 }

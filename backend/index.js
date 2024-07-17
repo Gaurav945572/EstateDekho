@@ -1,14 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import userRouter from "./Routes/User.js";
-import signUpRouter from "./Routes/SignUp.js"
-import signInRouter from "./Routes/SignIn.js"
-import googleAuth from "./Routes/OAuth.js";
+import userRouter from "./Routes/user_route.js";
 import cookieParser from "cookie-parser";
-import signOutRouter from "./Routes/SignOut.js";
-import listingRouter from './Routes/Listing.js';
-import SearchingListing from "./Routes/Searching.js";
+import listingRouter from './Routes/listing_route.js';
+import authRouter from './Routes/auth_route.js'
 import path from 'path';
 
 dotenv.config();
@@ -27,13 +23,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 
-app.use("/api/user",userRouter);
-app.use("/api/auth", signUpRouter)
-app.use('/api/auth',signInRouter);
-app.use('/api/auth/',googleAuth);
-app.use('/api/auth/',signOutRouter);
-app.use('/api/listing',listingRouter);
-app.use('/api/listings',SearchingListing);
+app.use('/api/user', userRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/listing', listingRouter);
 
 
 app.use(express.static(path.join(__dirname, '/client/dist')));

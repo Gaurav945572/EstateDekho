@@ -1,6 +1,6 @@
 import React, { useState ,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import ListingItems from '../Components/ListingItems';
+import ListingItem from '../Components/ListingItem';
 export default function Search() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -52,16 +52,19 @@ export default function Search() {
     
         const fetchListings = async () => {
           setLoading(true);
+          setShowMore(false);
           const searchQuery = urlParams.toString();
-          const res = await fetch(`/api/listings/get?${searchQuery}`);
+          const res = await fetch(`/api/listing/get?${searchQuery}`);
           const data = await res.json();
-          if(data.length>9){
+          if(data.length>8){
             setShowMore(true);
+          }
+          else{
+            setShowMore(false);
           }
           setListings(data);
           setLoading(false);
         };
-    
         fetchListings();
       }, [location.search]);
 
@@ -74,11 +77,9 @@ export default function Search() {
         ) {
             setSidebarData({ ...sidebarData, type: e.target.id });
         }
-    
         if (e.target.id === 'searchTerm') {
             setSidebarData({ ...sidebarData, searchTerm: e.target.value });
         }
-    
         if (
           e.target.id === 'parking' ||
           e.target.id === 'furnished' ||
@@ -240,11 +241,11 @@ export default function Search() {
             {!loading &&
             listings &&
             listings.map((listing) => (
-              <ListingItems key={listing._id} listing={listing} />
+              <ListingItem key={listing._id} listing={listing} />
             ))}
-            {showMore && <button onClick={handleShowMore} className='text-green-700 hover:underline text-center'>
+            {showMore && (<button onClick={handleShowMore} className='text-green-700 hover:underline text-center'>
                 Show More
-                </button>}
+                </button>)}
         </div>
       </div>
     </div>

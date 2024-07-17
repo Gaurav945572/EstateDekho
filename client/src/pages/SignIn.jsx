@@ -33,7 +33,7 @@ export default function SignIn() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log(data);
+      //console.log(data);
       if (data.success === false) {
         dispatch(signInFailure(data.message));
         return;
@@ -109,10 +109,10 @@ export default function SignIn() {
             </div>
           </form>
 
-          <p className="mt-10 text-center text-sm text-gray-800">
+          <p className="mt-10 text-center text-base text-gray-800">
             Dont Have an account?{" "}
-            <Link to={"/signup"}>
-              <span className="font-semibold ml-3 leading-6 text-indigo-400 hover:text-indigo-800  ">
+            <Link to={"/sign-up"}>
+              <span className="font-semibold ml-3 leading-6 hover:text-indigo-900 text-blue-600  ">
                 Sign Up
               </span>
             </Link>

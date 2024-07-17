@@ -35,7 +35,7 @@ export default function SignUp() {
       }
       setLoading(false);
       setError(null);
-      navigate('/signin'); // Use navigate to redirect
+      navigate('/'); // Use navigate to redirect
     } catch (error) {
       setLoading(false);
       setError(error.message);
@@ -124,10 +124,10 @@ export default function SignUp() {
             </div>
           </form>
 
-          <p className="mt-10 text-center text-sm text-gray-800">
+          <p className="mt-10 text-center text-base text-gray-800">
             Have an account?{" "}
-            <Link to={"/signin"}>
-              <span className="font-semibold ml-3 leading-6 text-indigo-400 hover:text-indigo-800  ">
+            <Link to={"/sign-in"}>
+              <span className="font-semibold ml-3 leading-6  hover:text-indigo-900 text-blue-600 ">
                 Sign In
               </span>
             </Link>

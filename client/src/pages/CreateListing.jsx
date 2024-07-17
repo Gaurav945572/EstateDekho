@@ -13,7 +13,7 @@ export default function CreateListing() {
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
-    imageUrls: [],
+    imageURL: [],
     name: '',
     description: '',
     address: '',
@@ -25,14 +25,15 @@ export default function CreateListing() {
     offer: false,
     parking: false,
     furnished: false,
+    petsAllowed:false,
   });
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  console.log(formData);
+  //console.log(formData);
   const handleImageSubmit = (e) => {
-    if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
+    if (files.length > 0 && files.length + formData.imageURL.length < 7) {
       setUploading(true);
       setImageUploadError(false);
       const promises = [];
@@ -43,7 +44,7 @@ export default function CreateListing() {
         .then((urls) => {
           setFormData({
             ...formData,
-            imageUrls: formData.imageUrls.concat(urls),
+            imageURL: formData.imageURL.concat(urls),
           });
           setImageUploadError(false);
           setUploading(false);
@@ -84,7 +85,7 @@ export default function CreateListing() {
   const handleRemoveImage = (index) => {
     setFormData({
       ...formData,
-      imageUrls: formData.imageUrls.filter((_, i) => i !== index),
+      imageURL: formData.imageURL.filter((_, i) => i !== index),
     });
   };
   const handleChange = (e) => {
@@ -97,6 +98,7 @@ export default function CreateListing() {
     if (
       e.target.id === 'parking' ||
       e.target.id === 'furnished' ||
+      e.target.id === 'petsAllowed' ||
       e.target.id === 'offer'
     ) {
       setFormData({
@@ -118,7 +120,7 @@ export default function CreateListing() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (formData.imageUrls.length < 1)
+      if (formData.imageURL.length < 1)
         return setError('You must upload at least one image');
       if (+formData.regularPrice < +formData.discountPrice)
         return setError('Discount price must be lower than regular price');
@@ -139,6 +141,7 @@ export default function CreateListing() {
       if (data.success === false) {
         setError(data.message);
       }
+      //console.log(data);
       navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(error.message);
@@ -147,15 +150,16 @@ export default function CreateListing() {
   };
   return (
     <main className='p-3 max-w-4xl mx-auto'>
-      <h1 className='text-3xl font-semibold text-center my-7'>
+      <h1 className='lg:text-5xl md:text-4xl text-3xl font-bold text-center my-7
+      text-transparent bg-clip-text bg-gradient-to-r to-red-300 from-rose-950 pb-2'>
         Create a Listing
       </h1>
-      <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row gap-4'>
+      <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row gap-4 border-4 p-10 rounded-2xl border-slate-800'>
         <div className='flex flex-col gap-4 flex-1'>
           <input
             type='text'
             placeholder='Name'
-            className='border p-3 rounded-lg'
+            className='border p-3 rounded-lg '
             id='name'
             maxLength='62'
             minLength='10'
@@ -221,6 +225,16 @@ export default function CreateListing() {
                 checked={formData.furnished}
               />
               <span>Furnished</span>
+            </div>
+            <div className='flex gap-2'>
+              <input
+                type='checkbox'
+                id='petsAllowed'
+                className='w-5'
+                onChange={handleChange}
+                checked={formData.petsAllowed}
+              />
+              <span>Pets Allowed</span>
             </div>
             <div className='flex gap-2'>
               <input
@@ -321,7 +335,7 @@ export default function CreateListing() {
               type='button'
               disabled={uploading}
               onClick={handleImageSubmit}
-              className='p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80'
+              className='p-3 text-blue-500 border border-blue-700 hover:text-white hover:bg-blue-500  rounded uppercase hover:shadow-lg disabled:opacity-80'
             >
               {uploading ? 'Uploading...' : 'Upload'}
             </button>
@@ -329,8 +343,8 @@ export default function CreateListing() {
           <p className='text-red-700 text-sm'>
             {imageUploadError && imageUploadError}
           </p>
-          {formData.imageUrls.length > 0 &&
-            formData.imageUrls.map((url, index) => (
+          {formData.imageURL.length > 0 &&
+            formData.imageURL.map((url, index) => (
               <div
                 key={url}
                 className='flex justify-between p-3 border items-center'
@@ -343,7 +357,7 @@ export default function CreateListing() {
                 <button
                   type='button'
                   onClick={() => handleRemoveImage(index)}
-                  className='p-3 text-red-700 rounded-lg uppercase hover:opacity-75'
+                  className='p-3 text-red-500 border border-red-700 hover:text-white hover:bg-red-500 rounded-lg uppercase hover:opacity-75'
                 >
                   Delete
                 </button>
@@ -351,7 +365,7 @@ export default function CreateListing() {
             ))}
           <button
             disabled={loading || uploading}
-            className='p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
+            className='p-3 bg-green-700 text-white hover:text-green-700 hover:bg-slate-300 hover:text-xl border-2 border-green-700 rounded-lg uppercase  disabled:opacity-80'
           >
             {loading ? 'Creating...' : 'Create listing'}
           </button>
