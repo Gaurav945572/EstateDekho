@@ -5,5 +5,11 @@
     "navigate": "^0.3.6",
     "react-router-dom": "^6.24.1",
     "swiper": "^11.1.5"
+  },
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   }
 }
