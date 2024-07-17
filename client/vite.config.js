@@ -13,4 +13,9 @@ export default defineConfig({
   },
 
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      input: '/src/main.jsx',  // Ensure this path is correct
+    }
+  }
 });
