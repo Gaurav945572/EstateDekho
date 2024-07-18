@@ -1,7 +1,6 @@
 {
   "name": "estatedekho",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -20,5 +19,6 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.7.0",
     "nodemon": "^3.1.4"
-  }
+  },
+  "description": ""
 }
