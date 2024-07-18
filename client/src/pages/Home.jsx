@@ -9,6 +9,7 @@ import {
   FaHome
 } from 'react-icons/fa';
 
+
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
@@ -59,7 +60,7 @@ export default function Home() {
           </h1>
           <br /><br />
           <h1 className="mb-4 mt-6 text-3xl font-extrabold text-gray-900 dark:text-white md:text-3xl lg:text-4xl">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-900 from-sky-800">HomeSpace</span>Discover your ideal next
+            <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-900 from-sky-800">HomeSpace:</span> Discover your ideal nest
           </h1>
           <p className="mb-6 text-lg font-normal text-gray-800 lg:text-xl mt-16 sm:px-16 xl:px-48 text-center dark:text-gray-800">
             It is the best place to find your next perfect place to live.We have a wide range of properties for you to choose from.
@@ -92,8 +93,8 @@ export default function Home() {
       </Swiper>
 
       {/* listing results for offer, sale and rent */}
-
-      <div className='max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10'>
+<div className='bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-300 '>
+      <div className='max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10 '>
         {offerListings && offerListings.length > 0 && (
           <div className=''>
             <div className='my-3'>
@@ -133,7 +134,8 @@ export default function Home() {
             </div>
           </div>
         )}
-      </div>
+      </div></div>
+    
     </div>
   );
 }

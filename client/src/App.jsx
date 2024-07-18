@@ -11,6 +11,7 @@ import CreateListing from "./pages/CreateListing";
 import UpdateListing from "./pages/UpdateListing";
 import Listing from "./pages/Listing.jsx";
 import Search from "./pages/Search.jsx";
+import Footer from "./Components/Footer.jsx";
 
 
 export default function App() {
@@ -31,6 +32,7 @@ export default function App() {
       </Route>
     
     </Routes>
+    <Footer></Footer>
     </BrowserRouter>
 
   )

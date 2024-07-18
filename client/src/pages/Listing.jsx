@@ -50,8 +50,8 @@ export default function Listing() {
   }, [params.listingId]);
   //console.log(loading);
   return (
-    <main>
-      {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
+    <main >
+     {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
       {error && (
         <p className='text-center my-7 text-2xl'>Something went wrong!</p>
       )}
@@ -89,13 +89,13 @@ export default function Listing() {
           )}
           <div className='flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4'>
             <p className='text-2xl font-semibold'>
-              {listing.name} - ${' '}
+              {listing.name} - Offer ${' '}
               {listing.offer
                 ? listing.discountPrice.toLocaleString('en-US')
                 : listing.regularPrice.toLocaleString('en-US')}
               {listing.type === 'rent' && ' / month'}
             </p>
-            <p className='flex items-center mt-6 gap-2 text-slate-600  text-sm'>
+            <p className='flex items-center mt-6 gap-2 text-slate-800  text-base'>
               <FaMapMarkerAlt className='text-green-700' />
               {listing.address}
             </p>
